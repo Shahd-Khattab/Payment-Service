@@ -17,6 +17,7 @@ app.all('*', function(req, res, next) {
 
 app.post('/api/payments', async (req,res) => {
   try{
+    const email= req.body.email
     const charge = await stripe.charges.create({
       amount: req.body.amount,
       currency: 'usd',
@@ -26,7 +27,11 @@ app.post('/api/payments', async (req,res) => {
     return res.status(200).json({
       success: true,
       message: 'Payment Successful',
-      id: charge.id
+      id: charge.id,
+      notification: await axios.post("https://notification-service-daradeer.vercel.app/api/notification",{
+        email,
+        text: "Payment Successful"
+      })
     });
   } catch(error) {
   console.log("Error ", error)
