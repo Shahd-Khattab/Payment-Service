@@ -28,10 +28,11 @@ app.post('/api/payments', async (req,res) => {
       success: true,
       message: 'Payment Successful',
       id: charge.id,
+      /*
       notification: await axios.post("https://notification-service-daradeer.vercel.app/api/notification",{
         email,
         text: "Payment Successful"
-      })
+      })*/
     });
   } catch(error) {
   console.log("Error ", error)
