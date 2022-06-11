@@ -39,6 +39,7 @@ app.post('/api/payments', async (req,res) => {
     return res.status(200).json({
       success: false,
       message: 'Payment Failed',
+      errors:error
     })
   }
 });
