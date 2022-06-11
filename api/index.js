@@ -19,7 +19,12 @@ app.all('*', function(req, res, next) {
 
 app.post('/api/payments', async (req,res) => {
   try{
+   // const notification= await axios.post("https://notification-service.vercel.app/api/notification",{
+     //   email,
+      //  text: "Payment Successful"
+      //})
     const email= req.body.email
+    const text= req.body.text
     const charge = await stripe.charges.create({
       amount: req.body.amount,
       currency: 'usd',
@@ -30,14 +35,11 @@ app.post('/api/payments', async (req,res) => {
       success: true,
       message: 'Payment Successful',
       id: charge.id,
-      
-      notification: await axios.post("https://notification-service.vercel.app/api/notification",{
-        email,
-        text: "Payment Successful"
-      })
-      
-
+      //notification
     });
+    
+    
+    
   } catch(error) {
   console.log("Error ", error)
     return res.status(200).json({
