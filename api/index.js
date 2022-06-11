@@ -35,11 +35,7 @@ app.post('/api/payments', async (req,res) => {
       success: true,
       message: 'Payment Successful',
       id: charge.id,
-      //notification
     });
-    
-    
-    
   } catch(error) {
   console.log("Error ", error)
     return res.status(200).json({
