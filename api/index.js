@@ -25,8 +25,10 @@ app.post('/api/payments', async (req,res) => {
       //})
     const email= req.body.email
     const text= req.body.text
+    const price= req.body.amount
+    const amount= price*100
     const charge = await stripe.charges.create({
-      amount: req.body.amount,
+      amount: amount,
       currency: 'usd',
       source: 'tok_mastercard',
       description: 'Rabbit Mart',
